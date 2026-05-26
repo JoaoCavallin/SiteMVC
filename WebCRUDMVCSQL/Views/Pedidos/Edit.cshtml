@@ -1,0 +1,109 @@
+﻿@model WebCRUDMVCSQL.Models.Pedido
+@{
+    ViewData["Title"] = "Edit";
+    var produtos = ViewBag.Produtos as List<WebCRUDMVCSQL.Models.Produto>;
+    var clientes = ViewBag.Clientes as List<WebCRUDMVCSQL.Models.Cliente>;
+}
+<h1>Edit</h1>
+<h4>Pedido</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label>Cliente</label>
+                <select name="clienteId" class="form-control">
+                    @foreach (var c in clientes)
+                    {
+                        @if (c.Id == Model.ClienteId)
+                        {
+                            <option value="@c.Id" selected>@c.Nome</option>
+                        }
+                        else
+                        {
+                            <option value="@c.Id">@c.Nome</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Data</label>
+                <input type="date" name="data" class="form-control" value="@Model.Data.ToString("yyyy-MM-dd")" />
+            </div>
+
+            <hr />
+            <h5>Itens do Pedido</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="itens">
+                    @foreach (var item in Model.Itens)
+                    {
+                        <tr>
+                            <td>
+                                <select name="produtoIds" class="form-control">
+                                    @foreach (var p in produtos)
+                                    {
+                                        <!-- ✅ Correto -->
+                                        @if (p.Id == item.ProdutoId)
+                                        {
+                                            <option value="@p.Id" selected>@p.Nome — R$ @p.Preco</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@p.Id">@p.Nome — R$ @p.Preco</option>
+                                        }
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" name="quantidades" class="form-control" value="@item.Quantidade" min="1" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" onclick="removerLinha(this)">X</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-secondary mb-3" onclick="adicionarLinha()">+ Adicionar Produto</button>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+        function adicionarLinha() {
+            var tbody = document.getElementById("itens");
+            var primeiraLinha = tbody.rows[0].innerHTML;
+            var novaLinha = document.createElement("tr");
+            novaLinha.innerHTML = primeiraLinha;
+            tbody.appendChild(novaLinha);
+        }
+
+        function removerLinha(btn) {
+            var tbody = document.getElementById("itens");
+            if (tbody.rows.length > 1) {
+                btn.closest("tr").remove();
+            }
+        }
+    </script>
+}

@@ -1,0 +1,97 @@
+﻿@model WebCRUDMVCSQL.Models.Pedido
+@{
+    ViewData["Title"] = "Create";
+    var produtos = ViewBag.Produtos as List<WebCRUDMVCSQL.Models.Produto>;
+    var clientes = ViewBag.Clientes as List<WebCRUDMVCSQL.Models.Cliente>;
+}
+
+<h1>Create</h1>
+<h4>Pedido</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label>Cliente</label>
+                <select name="clienteId" class="form-control">
+                    @foreach (var c in clientes)
+                    {
+                        <option value="@c.Id">@c.Nome</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Data</label>
+                <input type="date" name="data" class="form-control" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            </div>
+
+            <hr />
+            <h5>Itens do Pedido</h5>
+
+            <table class="table" id="tabelaItens">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="itens">
+                    <tr>
+                        <td>
+                            <select name="produtoIds" class="form-control">
+                                @foreach (var p in produtos)
+                                {
+                                    <option value="@p.Id">@p.Nome — R$ @p.Preco</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" name="quantidades" class="form-control" value="1" min="1" />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="removerLinha(this)">X</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-secondary mb-3" onclick="adicionarLinha()">+ Adicionar Produto</button>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Criar Pedido" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        function adicionarLinha() {
+            var tbody = document.getElementById("itens");
+            var primeiraLinha = tbody.rows[0].innerHTML;
+            var novaLinha = document.createElement("tr");
+            novaLinha.innerHTML = primeiraLinha;
+            tbody.appendChild(novaLinha);
+        }
+
+        function removerLinha(btn) {
+            var tbody = document.getElementById("itens");
+            if (tbody.rows.length > 1) {
+                btn.closest("tr").remove();
+            }
+        }
+    </script>
+}
