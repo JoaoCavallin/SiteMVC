@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("WebCRUDMVCSQL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9dfc429291b03b92082a491304a22bb835eef10c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f14b4b96750ee9523bb871ca6f817f98f4ae243")]
 [assembly: System.Reflection.AssemblyProductAttribute("WebCRUDMVCSQL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("WebCRUDMVCSQL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

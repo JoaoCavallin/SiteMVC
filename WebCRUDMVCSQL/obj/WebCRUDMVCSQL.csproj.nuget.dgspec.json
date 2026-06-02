@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JOAOPEDROCAVALLIN\\source\\repos\\PROJETO_CRUD_MVC_SQL-main\\WebCRUDMVCSQL\\WebCRUDMVCSQL.csproj": {}
+    "C:\\Users\\JOAOPEDROCAVALLIN\\Source\\Repos\\SiteMVC\\WebCRUDMVCSQL\\WebCRUDMVCSQL.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JOAOPEDROCAVALLIN\\source\\repos\\PROJETO_CRUD_MVC_SQL-main\\WebCRUDMVCSQL\\WebCRUDMVCSQL.csproj": {
+    "C:\\Users\\JOAOPEDROCAVALLIN\\Source\\Repos\\SiteMVC\\WebCRUDMVCSQL\\WebCRUDMVCSQL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JOAOPEDROCAVALLIN\\source\\repos\\PROJETO_CRUD_MVC_SQL-main\\WebCRUDMVCSQL\\WebCRUDMVCSQL.csproj",
+        "projectUniqueName": "C:\\Users\\JOAOPEDROCAVALLIN\\Source\\Repos\\SiteMVC\\WebCRUDMVCSQL\\WebCRUDMVCSQL.csproj",
         "projectName": "WebCRUDMVCSQL",
-        "projectPath": "C:\\Users\\JOAOPEDROCAVALLIN\\source\\repos\\PROJETO_CRUD_MVC_SQL-main\\WebCRUDMVCSQL\\WebCRUDMVCSQL.csproj",
+        "projectPath": "C:\\Users\\JOAOPEDROCAVALLIN\\Source\\Repos\\SiteMVC\\WebCRUDMVCSQL\\WebCRUDMVCSQL.csproj",
         "packagesPath": "C:\\Users\\JOAOPEDROCAVALLIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JOAOPEDROCAVALLIN\\source\\repos\\PROJETO_CRUD_MVC_SQL-main\\WebCRUDMVCSQL\\obj\\",
+        "outputPath": "C:\\Users\\JOAOPEDROCAVALLIN\\Source\\Repos\\SiteMVC\\WebCRUDMVCSQL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -88,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306\\RuntimeIdentifierGraph.json"
         }
       }
     }
