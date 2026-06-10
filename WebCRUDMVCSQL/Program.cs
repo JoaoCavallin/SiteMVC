@@ -1,5 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using WebCRUDMVCSQL.Models;
+using System.Globalization;
+
+CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +12,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<Contexto>
     (options => options.UseSqlServer
-    ("Data Source=TQR224081;Initial Catalog=CRUD_MVC_SQL;Integrated Security=False;User ID=tds;Password=tds123;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True"));
+    ("Data Source=TQR224081;Initial Catalog=FelcaSQL;Integrated Security=False;User ID=tds;Password=tds123;Connect Timeout=15;Encrypt=False;TrustServerCertificate=True"));
 
 var app = builder.Build();
 

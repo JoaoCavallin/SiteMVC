@@ -16,7 +16,7 @@ namespace WebCRUDMVCSQL.Models
 
         [Column("Peso")]
         [Display(Name = "Peso")]
-        public double Peso { get; set; }
+        public decimal Peso { get; set; }
 
         [Column("Preco")]
         [Display(Name = "Preço")]

@@ -1,12 +1,14 @@
 ﻿#nullable disable
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 using WebCRUDMVCSQL.Models;
+using WebCRUDMVCSQL.ViewModels;
 
 namespace WebCRUDMVCSQL.Controllers
 {
@@ -54,18 +56,26 @@ namespace WebCRUDMVCSQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Peso,Preco")] Produto produto)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Peso,Preco")] ProdutoViewModel model)
         {
 
             ModelState.Remove("Itens");
 
             if (ModelState.IsValid)
             {
+
+                var produto = new Produto
+                {
+                    Nome = model.Nome,
+                    Peso = model.Peso,
+                    Preco = model.Preco
+                };
+
                 _context.Add(produto);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(produto);
+            return View(model);
         }
 
         // GET: Produtos/Edit/5
@@ -81,7 +91,15 @@ namespace WebCRUDMVCSQL.Controllers
             {
                 return NotFound();
             }
-            return View(produto);
+
+            var viewModel = new ProdutoViewModel
+            {
+                Nome = produto.Nome,
+                Peso = produto.Peso,
+                Preco = produto.Preco
+            };
+
+            return View(viewModel);
         }
 
         // POST: Produtos/Edit/5
@@ -89,15 +107,17 @@ namespace WebCRUDMVCSQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Peso,Preco")] Produto produto)
+        public async Task<IActionResult> Edit(int id, ProdutoViewModel viewModel)
         {
-            if (id != produto.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
+                var produto = await _context.Produto.FindAsync(id);
+                if (produto == null) return NotFound();
+
+                produto.Nome = viewModel.Nome;
+                produto.Peso = viewModel.Peso;
+                produto.Preco = viewModel.Preco;
+
                 try
                 {
                     _context.Update(produto);
@@ -105,18 +125,15 @@ namespace WebCRUDMVCSQL.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProdutoExists(produto.Id))
-                    {
+                    if (!ProdutoExists(id))
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(produto);
+            return View(viewModel);
         }
 
         // GET: Produtos/Delete/5

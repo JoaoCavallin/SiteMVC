@@ -6,7 +6,7 @@ namespace WebCRUDMVCSQL.Models
     [Table("Usuario")]
     public class Usuario
     {
-
+        [Key]
         [Column("Id")]
         [Display(Name = "Código")]
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace WebCRUDMVCSQL.Models
 
         [Column("Senha")]
         [Display(Name = "Senha")]
+        [DataType(DataType.Password)]
         public string Senha { get; set; }
-
     }
 }

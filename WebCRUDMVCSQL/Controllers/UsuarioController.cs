@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebCRUDMVCSQL.Models;
+using WebCRUDMVCSQL.ViewModels;
 
 namespace WebCRUDMVCSQL.Controllers
 {
@@ -48,15 +49,22 @@ namespace WebCRUDMVCSQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha")] Usuario usuario)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Email,Senha")] UsuarioViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var usuario = new Usuario
+                {
+                    Nome = model.Nome,
+                    Email = model.Email,
+                    Senha = model.Senha
+                };
+
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Login");
             }
-            return View(usuario);
+            return View(model);
         }
 
         // GET: Usuarios/Create
@@ -105,7 +113,15 @@ namespace WebCRUDMVCSQL.Controllers
             {
                 return NotFound();
             }
-            return View(usuario);
+
+            var viewModel = new UsuarioViewModel
+            {
+                Nome = usuario.Nome,
+                Email = usuario.Email,
+                Senha = usuario.Senha
+            };
+
+            return View(viewModel);
         }
 
         // POST: Usuarios/Edit/5
@@ -113,15 +129,17 @@ namespace WebCRUDMVCSQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha")] Usuario usuario)
+        public async Task<IActionResult> Edit(int id, UsuarioViewModel viewModel)
         {
-            if (id != usuario.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
+                var usuario = await _context.Usuario.FindAsync(id);
+                if (usuario == null) return NotFound();
+
+                usuario.Nome = viewModel.Nome;
+                usuario.Email = viewModel.Email;
+                usuario.Senha = viewModel.Senha;
+
                 try
                 {
                     _context.Update(usuario);
@@ -129,18 +147,15 @@ namespace WebCRUDMVCSQL.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UsuarioExists(usuario.Id))
-                    {
+                    if (!UsuarioExists(id))
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(usuario);
+            return View(viewModel);
         }
 
         // GET: Usuarios/Delete/5

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\JOAOPEDROCAVALLIN\\source\\repos\\SiteMVC\\WebCRUDMVCSQL\\FelcaMVC.csproj": {}
+    "C:\\Users\\JOAOPEDROCAVALLIN\\Source\\Repos\\SiteMVC\\WebCRUDMVCSQL\\FelcaMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\JOAOPEDROCAVALLIN\\source\\repos\\SiteMVC\\WebCRUDMVCSQL\\FelcaMVC.csproj": {
+    "C:\\Users\\JOAOPEDROCAVALLIN\\Source\\Repos\\SiteMVC\\WebCRUDMVCSQL\\FelcaMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\JOAOPEDROCAVALLIN\\source\\repos\\SiteMVC\\WebCRUDMVCSQL\\FelcaMVC.csproj",
+        "projectUniqueName": "C:\\Users\\JOAOPEDROCAVALLIN\\Source\\Repos\\SiteMVC\\WebCRUDMVCSQL\\FelcaMVC.csproj",
         "projectName": "FelcaMVC",
-        "projectPath": "C:\\Users\\JOAOPEDROCAVALLIN\\source\\repos\\SiteMVC\\WebCRUDMVCSQL\\FelcaMVC.csproj",
+        "projectPath": "C:\\Users\\JOAOPEDROCAVALLIN\\Source\\Repos\\SiteMVC\\WebCRUDMVCSQL\\FelcaMVC.csproj",
         "packagesPath": "C:\\Users\\JOAOPEDROCAVALLIN\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\JOAOPEDROCAVALLIN\\source\\repos\\SiteMVC\\WebCRUDMVCSQL\\obj\\",
+        "outputPath": "C:\\Users\\JOAOPEDROCAVALLIN\\Source\\Repos\\SiteMVC\\WebCRUDMVCSQL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

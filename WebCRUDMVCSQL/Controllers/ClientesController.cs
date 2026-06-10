@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebCRUDMVCSQL.Models;
+using WebCRUDMVCSQL.ViewModels;
 
 namespace WebCRUDMVCSQL.Controllers
 {
@@ -54,15 +55,23 @@ namespace WebCRUDMVCSQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Sexo,Email,CPF")] Cliente cliente)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Sexo,Email,CPF")] ClienteViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var cliente = new Cliente
+                {
+                    Nome = model.Nome,
+                    Sexo = model.Sexo,
+                    Email = model.Email,
+                    CPF = model.CPF
+                };
+
                 _context.Add(cliente);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(model);
         }
 
         // GET: Clientes/Edit/5
@@ -78,7 +87,16 @@ namespace WebCRUDMVCSQL.Controllers
             {
                 return NotFound();
             }
-            return View(cliente);
+
+            var viewModel = new ClienteViewModel
+            {
+                Nome = cliente.Nome,
+                Sexo = cliente.Sexo,
+                Email = cliente.Email,
+                CPF = cliente.CPF
+            };
+
+            return View(viewModel);
         }
 
         // POST: Clientes/Edit/5
@@ -86,15 +104,18 @@ namespace WebCRUDMVCSQL.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Sexo,Email,CPF")] Cliente cliente)
+        public async Task<IActionResult> Edit(int id, ClienteViewModel viewModel)
         {
-            if (id != cliente.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
+                var cliente = await _context.Cliente.FindAsync(id);
+                if (cliente == null) return NotFound();
+
+                cliente.Nome = viewModel.Nome;
+                cliente.Sexo = viewModel.Sexo;
+                cliente.Email = viewModel.Email;
+                cliente.CPF = viewModel.CPF;
+
                 try
                 {
                     _context.Update(cliente);
@@ -102,20 +123,16 @@ namespace WebCRUDMVCSQL.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ClienteExists(cliente.Id))
-                    {
+                    if (!ClienteExists(id))
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+            return View(viewModel);
         }
-
         // GET: Clientes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {

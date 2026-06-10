@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FelcaMVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f14b4b96750ee9523bb871ca6f817f98f4ae243")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ede371a9008214a07bd346c639f574c33aa2b09")]
 [assembly: System.Reflection.AssemblyProductAttribute("FelcaMVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FelcaMVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

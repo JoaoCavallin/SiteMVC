@@ -26,6 +26,6 @@ namespace WebCRUDMVCSQL.Models
             [Display(Name = "CPF")]
             public string CPF { get; set; }
 
-             public string SexoTexto => Sexo ? "s" : "n";
+            public string SexoTexto => Sexo ? "M" : "F";
     }
 }
